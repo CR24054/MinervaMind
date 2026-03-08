@@ -17,7 +17,7 @@ El proyecto surge como una respuesta al *burnout* académico, buscando que el é
 | :--- | :---: | :--- | :--- |
 | **Daniel Abraham Cerritos Rivera** | CR24054 | Frontend / Líder | [@CR24054](https://github.com/cr24054) |
 | **Christopher Bryan Rodriguez Medina** | RM21062 | Backend / DB | [@CrisMdn01](https://github.com/CrisMdn01) |
-| **Integrante 4** | carnet4 | rol | [@perfil](linkperfil) |
+| **Nayeli Sarai Santos Hernandez** | SH24001 | Backend | [@sh24001-code](https://github.com/sh24001-code) |
 | **Integrante 5** | carnet5 | rol | [@perfil](linkperfil) |
 
 ---
