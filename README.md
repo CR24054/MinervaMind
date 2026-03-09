@@ -19,6 +19,7 @@ El proyecto surge como una respuesta al *burnout* académico, buscando que el é
 | **Christopher Bryan Rodriguez Medina** | RM21062 | Backend / DB | [@CrisMdn01](https://github.com/CrisMdn01) |
 | **Nayeli Sarai Santos Hernandez** | SH24001 | Backend | [@sh24001-code](https://github.com/sh24001-code) |
 | **Integrante 5** | carnet5 | rol | [@perfil](linkperfil) |
+| **Oscar Ernesto Rivas Salguero** | RS0821 | Frontend | [@RS08021](https://github.com/rs08021) |
 
 ---
 
