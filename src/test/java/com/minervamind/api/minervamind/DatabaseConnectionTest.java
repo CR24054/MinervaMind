@@ -1,3 +1,4 @@
+
 package com.minervamind.api.minervamind;
 
 import org.junit.jupiter.api.Test;
