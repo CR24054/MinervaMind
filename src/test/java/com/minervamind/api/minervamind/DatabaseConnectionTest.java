@@ -2,19 +2,23 @@
 package com.minervamind.api.minervamind;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled("Test de integración con PostgreSQL - requiere BD configurada localmente")
 class DatabaseConnectionTest {
 
 	@Test
+	@DisplayName("Debe validar conexión a la base de datos PostgreSQL")
 	void testDatabaseConnection() throws SQLException {
 		String url = "jdbc:postgresql://localhost:5432/minervamind";
 		String user = "postgres";
-		String password = "12345";
+		String password = "soydaniel13";
 		
 		System.out.println("\n=== VALIDACION DE CONEXION A BASE DE DATOS ===");
 		System.out.println("URL: " + url);
