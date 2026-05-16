@@ -1,0 +1,593 @@
+/* Christopher: Aquí defino los tokens de diseño basados en Headspace */
+/* Uso CSS variables para que sea fácil de mantener y consistente */
+
+:root {
+  /* Christopher: Colores pasteles inspirados en Headspace */
+  --color-sky-connect: #0061ef;
+  --color-sunshine-burst: #ffce00;
+  --color-deep-plum: #3b197f;
+  --color-ocean-glimmer: #00a4ff;
+  --color-blush-petal: #ffa1cc;
+  --color-forest-calm: #028730;
+  --color-inkwell-gray: #4b4c4d;
+  --color-true-black: #000000;
+  --color-charcoal-tone: #2d2c2b;
+  --color-cloud-whisper: #f9f4f2;
+  --color-stone-slate: #44423f;
+  --color-pure-white: #ffffff;
+  --color-pale-ash: #e2ded9;
+  --color-light-stone: #d0d0d0;
+
+  /* Christopher: Tipografía - uso fuentes del sistema para que cargue rápido en móvil */
+  --font-headspace: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Christopher: Tamaños de texto responsive */
+  --text-caption: 0.75rem;      /* 12px */
+  --text-body-sm: 0.875rem;     /* 14px */
+  --text-body: 1rem;            /* 16px */
+  --text-subheading: 1.125rem;  /* 18px */
+  --text-heading-sm: 1.5rem;    /* 24px */
+  --text-heading: 2rem;         /* 32px */
+  --text-heading-lg: 2.5rem;    /* 40px */
+  --text-display: 3rem;         /* 48px */
+
+  /* Christopher: Espaciado basado en múltiplos de 4px */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+
+  /* Christopher: Bordes redondeados para el aspecto suave de Headspace */
+  --radius-default: 8px;
+  --radius-cards: 16px;
+  --radius-buttons: 24px;
+  --radius-largebuttons: 32px;
+  --radius-pills: 800px;
+
+  /* Christopher: Sombra sutil de Headspace */
+  --shadow-subtle: rgba(65, 61, 69, 0.2) 0px 2px 0px 0px;
+}
+
+/* Christopher: Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-headspace);
+  background-color: var(--color-cloud-whisper);
+  color: var(--color-inkwell-gray);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Christopher: Container principal */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-16);
+  min-height: 100vh;
+}
+
+/* Christopher: Header - diseño mobile first */
+.header {
+  text-align: center;
+  padding: var(--spacing-32) 0;
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-cards);
+  margin-bottom: var(--spacing-24);
+  box-shadow: var(--shadow-subtle);
+}
+
+.header h1 {
+  font-size: var(--text-heading);
+  font-weight: 700;
+  color: var(--color-deep-plum);
+  margin-bottom: var(--spacing-8);
+}
+
+.header p {
+  font-size: var(--text-body-sm);
+  color: var(--color-stone-slate);
+}
+
+/* Christopher: Sección de categorías - Mobile first */
+.categories-section {
+  margin-bottom: var(--spacing-32);
+}
+
+.categories-title {
+  font-size: var(--text-heading-sm);
+  font-weight: 700;
+  color: var(--color-inkwell-gray);
+  margin-bottom: var(--spacing-16);
+}
+
+/* Christopher: Grid de categorías - en móvil es 1 columna, en desktop 3 */
+.categories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-16);
+}
+
+/* Christopher: Cards de categoría con colores distintivos */
+.category-card {
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-24);
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: rgba(65, 61, 69, 0.3) 0px 4px 0px 0px;
+}
+
+.category-card.study {
+  border-color: var(--color-sky-connect);
+}
+
+.category-card.sleep {
+  border-color: var(--color-blush-petal);
+}
+
+.category-card.wellness {
+  border-color: var(--color-forest-calm);
+}
+
+.category-card h3 {
+  font-size: var(--text-subheading);
+  font-weight: 600;
+  margin-bottom: var(--spacing-8);
+  color: var(--color-inkwell-gray);
+}
+
+.category-card p {
+  font-size: var(--text-body-sm);
+  color: var(--color-stone-slate);
+}
+
+/* Christopher: Sección de tareas */
+.tasks-section {
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-24);
+  margin-bottom: var(--spacing-24);
+  box-shadow: var(--shadow-subtle);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-20);
+}
+
+.section-title {
+  font-size: var(--text-heading-sm);
+  font-weight: 700;
+  color: var(--color-inkwell-gray);
+}
+
+/* Christopher: Botones con estilo Headspace */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-headspace);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--color-sky-connect);
+  color: var(--color-pure-white);
+  border-radius: var(--radius-largebuttons);
+  padding: 14px 24px;
+  font-size: var(--text-body);
+  box-shadow: var(--shadow-subtle);
+}
+
+.btn-primary:hover {
+  background-color: #0052cc;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--color-cloud-whisper);
+  color: var(--color-charcoal-tone);
+  border-radius: var(--radius-buttons);
+  padding: 10px 20px;
+  font-size: var(--text-body-sm);
+  border: 1px solid var(--color-charcoal-tone);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-pale-ash);
+}
+
+.btn-danger {
+  background-color: #ff4444;
+  color: var(--color-pure-white);
+  border-radius: var(--radius-buttons);
+  padding: 8px 16px;
+  font-size: var(--text-body-sm);
+}
+
+.btn-danger:hover {
+  background-color: #cc3333;
+}
+
+/* Christopher: Formularios con estilo Headspace */
+.form-group {
+  margin-bottom: var(--spacing-20);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-inkwell-gray);
+  margin-bottom: var(--spacing-8);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--color-light-stone);
+  border-radius: var(--radius-default);
+  font-family: var(--font-headspace);
+  font-size: var(--text-body);
+  color: var(--color-true-black);
+  background-color: var(--color-pure-white);
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-sky-connect);
+  box-shadow: 0 0 0 3px rgba(0, 97, 239, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Christopher: Cards de tareas */
+.task-card {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-pale-ash);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20);
+  margin-bottom: var(--spacing-16);
+  transition: all 0.2s ease;
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-subtle);
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: var(--spacing-12);
+}
+
+.task-card-title {
+  font-size: var(--text-subheading);
+  font-weight: 600;
+  color: var(--color-inkwell-gray);
+}
+
+.task-card-category {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pills);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.category-study {
+  background-color: rgba(0, 97, 239, 0.1);
+  color: var(--color-sky-connect);
+}
+
+.category-sleep {
+  background-color: rgba(255, 161, 204, 0.2);
+  color: #d46a9a;
+}
+
+.category-wellness {
+  background-color: rgba(2, 135, 48, 0.1);
+  color: var(--color-forest-calm);
+}
+
+.task-card-description {
+  font-size: var(--text-body);
+  color: var(--color-stone-slate);
+  margin-bottom: var(--spacing-12);
+  line-height: 1.6;
+}
+
+.task-card-meta {
+  display: flex;
+  gap: var(--spacing-16);
+  font-size: var(--text-body-sm);
+  color: var(--color-stone-slate);
+  margin-bottom: var(--spacing-16);
+}
+
+.task-card-actions {
+  display: flex;
+  gap: var(--spacing-12);
+}
+
+/* Christopher: Modal con backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-16);
+}
+
+.modal-content {
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-32);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-size: var(--text-heading-sm);
+  font-weight: 700;
+  color: var(--color-inkwell-gray);
+  margin-bottom: var(--spacing-24);
+}
+
+.modal-actions {
+  display: flex;
+  gap: var(--spacing-12);
+  justify-content: flex-end;
+  margin-top: var(--spacing-24);
+}
+
+/* Christopher: Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-48) var(--spacing-24);
+  color: var(--color-stone-slate);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-16);
+}
+
+.empty-state h3 {
+  font-size: var(--text-subheading);
+  font-weight: 600;
+  margin-bottom: var(--spacing-8);
+}
+
+/* Christopher: Tabs para navegación */
+.tabs {
+  display: flex;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-24);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-8);
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 1px solid var(--color-pale-ash);
+  border-radius: var(--radius-default);
+  background-color: var(--color-pure-white);
+  color: var(--color-inkwell-gray);
+  font-family: var(--font-headspace);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab.active {
+  background-color: var(--color-sky-connect);
+  color: var(--color-pure-white);
+  border-color: var(--color-sky-connect);
+}
+
+.tab:hover:not(.active) {
+  background-color: var(--color-cloud-whisper);
+}
+
+/* Christopher: Footer */
+.footer {
+  text-align: center;
+  padding: var(--spacing-32) var(--spacing-16);
+  color: var(--color-stone-slate);
+  font-size: var(--text-body-sm);
+  margin-top: var(--spacing-48);
+}
+
+/* Christopher: Responsive - Desktop */
+@media (min-width: 768px) {
+  .app-container {
+    padding: var(--spacing-24);
+  }
+
+  .header {
+    padding: var(--spacing-48) 0;
+  }
+
+  .header h1 {
+    font-size: var(--text-heading-lg);
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .task-card-content {
+    flex: 1;
+  }
+
+  .task-card-actions {
+    flex-direction: column;
+    margin-left: var(--spacing-24);
+  }
+
+  .modal-content {
+    padding: var(--spacing-48);
+  }
+}
+
+/* Christopher: Scrollbar personalizada para que se vea suave */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cloud-whisper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-pale-ash);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-light-stone);
+}
+
+/* Christopher: Animaciones suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Christopher: Mensaje de confirmación */
+.toast {
+  position: fixed;
+  bottom: var(--spacing-24);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-inkwell-gray);
+  color: var(--color-pure-white);
+  padding: 16px 24px;
+  border-radius: var(--radius-buttons);
+  font-size: var(--text-body-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.toast-success {
+  background-color: var(--color-forest-calm);
+}
+
+.toast-error {
+  background-color: #e74c3c;
+}
+
+/* Christopher: Badges de prioridad */
+.priority-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-pills);
+  font-size: var(--text-caption);
+  font-weight: 600;
+}
+
+.priority-high {
+  background-color: rgba(255, 68, 68, 0.1);
+  color: #e74c3c;
+}
+
+.priority-medium {
+  background-color: rgba(255, 206, 0, 0.15);
+  color: #b89500;
+}
+
+.priority-low {
+  background-color: rgba(0, 164, 255, 0.1);
+  color: var(--color-ocean-glimmer);
+}
+
+/* Christopher: Estados de tareas */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-pills);
+  font-size: var(--text-caption);
+  font-weight: 600;
+}
+
+.status-pending {
+  background-color: rgba(255, 206, 0, 0.15);
+  color: #b89500;
+}
+
+.status-in-progress {
+  background-color: rgba(0, 97, 239, 0.1);
+  color: var(--color-sky-connect);
+}
+
+.status-completed {
+  background-color: rgba(2, 135, 48, 0.1);
+  color: var(--color-forest-calm);
+}
