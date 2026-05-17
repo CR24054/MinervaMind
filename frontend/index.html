@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MinervaMind | Tareas y Hábitos</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- AGREGADO POR OSCAR: estilos solo para el toast de notificaciones -->
+    <link rel="stylesheet" href="script.css">
 </head>
 
 <body>
@@ -255,6 +257,32 @@
                     <button type="button" class="btn btn-danger">Eliminar</button>
                 </div>
             </article>
+
+            <!-- AGREGADO POR OSCAR: tareas extra para que la sección no se vea vacía -->
+            <article class="card">
+                <h3>Resolver ejercicios de Estructuras de Datos</h3>
+                <p>Practicar recorridos en árboles AVL y balanceo con rotaciones.</p>
+                <p><span class="badge badge-info">Prioridad Media</span></p>
+                <p><strong>Fecha:</strong> 2026-05-19</p>
+                <p><span class="badge badge-warning">Pendiente</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <h3>Repaso de Cálculo III</h3>
+                <p>Ejercicios de integrales por partes y técnicas de sustitución.</p>
+                <p><span class="badge badge-danger">Prioridad Alta</span></p>
+                <p><strong>Fecha:</strong> 2026-05-18</p>
+                <p><span class="badge badge-success">En progreso</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+            <!-- /AGREGADO POR OSCAR -->
             </div>
         </section>
 
@@ -401,6 +429,46 @@
 
     </dialog>
 
+    <!-- AGREGADO POR OSCAR: modal de confirmación para borrar (usa los mismos estilos de <dialog>) -->
+    <dialog id="delete-modal">
+
+        <h2>¿Eliminar esta tarea?</h2>
+
+        <form>
+
+            <fieldset>
+
+                <legend>Confirmar eliminación</legend>
+
+                <p>
+                    Estás a punto de eliminar
+                    <strong id="delete-target-name">la tarea seleccionada</strong>.
+                    Esta acción no se puede deshacer.
+                </p>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" id="confirm-delete-btn">
+                        Sí, eliminar
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" id="cancel-delete-btn">
+                        Cancelar
+                    </button>
+                </div>
+
+            </fieldset>
+
+        </form>
+
+    </dialog>
+
+    <!-- AGREGADO POR OSCAR: notificación toast (feedback al guardar / actualizar / eliminar) -->
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden>
+        <span class="toast-icon" aria-hidden="true">✓</span>
+        <span class="toast-msg">Operación realizada</span>
+    </div>
+    <!-- /AGREGADO POR OSCAR -->
+
     <hr>
 
     <footer>
@@ -410,6 +478,9 @@
             </p>
         </div>
     </footer>
+
+    <!-- AGREGADO POR OSCAR: lógica de simulación CRUD -->
+    <script src="script.js"></script>
 
 </body>
 
