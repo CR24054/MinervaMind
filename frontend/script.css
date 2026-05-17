@@ -1,0 +1,78 @@
+/* ============================================
+   MinervaMind - Estilos adicionales (Oscar)
+   Solo estilos para el toast de notificación.
+   Reutiliza las variables CSS de styles.css para
+   mantener coherencia con el design system.
+   ============================================ */
+
+.toast {
+  position: fixed;
+  bottom: var(--space-6, 1.5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+  background: var(--color-surface, #FFFFFF);
+  color: var(--color-text-primary, #2C3E50);
+  border: 1px solid var(--color-border-light, #F0EDE8);
+  border-radius: var(--radius-full, 9999px);
+  box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(44, 62, 80, 0.12));
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: var(--weight-semibold, 600);
+  z-index: var(--z-tooltip, 400);
+  opacity: 0;
+  transition: transform var(--transition-spring, 400ms cubic-bezier(0.34, 1.56, 0.64, 1)),
+              opacity var(--transition-base, 200ms ease);
+  max-width: calc(100vw - 2rem);
+}
+
+.toast:not([hidden]) {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--color-success, #A8E6CF);
+  color: var(--color-text-inverse, #FFFFFF);
+  font-size: 14px;
+  font-weight: var(--weight-bold, 700);
+  flex-shrink: 0;
+}
+
+/* Variantes por tipo de operación */
+.toast--success .toast-icon {
+  background: var(--color-success, #A8E6CF);
+}
+
+.toast--update .toast-icon {
+  background: var(--color-primary, #7BB3D9);
+}
+
+.toast--delete .toast-icon {
+  background: var(--color-danger, #FFAAA5);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .toast {
+    bottom: 1rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+    width: calc(100vw - 2rem);
+    justify-content: center;
+  }
+}
+
+/* Accesibilidad: reducir motion */
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: opacity 0.01ms;
+  }
+}
