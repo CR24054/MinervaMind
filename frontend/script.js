@@ -1,25 +1,7 @@
-/* ============================================
-   MinervaMind - Simulación de CRUD (Oscar)
-   --------------------------------------------
-   Esta capa NO se conecta al backend real.
-   Solo simula visualmente las operaciones que
-   ofrecerá la API (POST, PUT, DELETE) para la
-   entrega del Laboratorio 3.
-
-   - GET    → tarjetas precargadas en HTML
-   - POST   → form #new-item crea una nueva card
-   - PUT    → dialog #edit-modal actualiza la card
-   - DELETE → dialog #delete-modal confirma y borra
-   ============================================ */
-
 (function () {
   'use strict';
 
-  /* --------------------------------------------
-     Referencias a elementos del DOM
-     (todos ya existen en el index.html del equipo)
-     -------------------------------------------- */
-  const form        = document.querySelector('#new-item form');
+const form        = document.querySelector('#new-item form');
   const editModal   = document.getElementById('edit-modal');
   const editForm    = editModal.querySelector('form');
   const editTitle   = document.getElementById('edit-title');
@@ -37,16 +19,9 @@
   const toastIcon   = toast.querySelector('.toast-icon');
   const toastMsg    = toast.querySelector('.toast-msg');
 
-  /* --------------------------------------------
-     Estado mínimo para edición y borrado:
-     guardamos la referencia al <article> activo.
-     -------------------------------------------- */
-  let activeCard = null;
+let activeCard = null;
 
-  /* --------------------------------------------
-     Utilidades
-     -------------------------------------------- */
-  const sectionByCategory = {
+const sectionByCategory = {
     study:    'study-section',
     sleep:    'sleep-section',
     wellness: 'wellness-section'
@@ -67,11 +42,7 @@
       .replace(/'/g, '&#039;');
   }
 
-  /* --------------------------------------------
-     Toast (notificación inferior)
-     types: 'success' | 'update' | 'delete'
-     -------------------------------------------- */
-  let toastTimer = null;
+let toastTimer = null;
   const ICONS = { success: '✓', update: '↻', delete: '✕' };
 
   function showToast(message, type) {
@@ -87,12 +58,7 @@
     }, 2600);
   }
 
-  /* --------------------------------------------
-     Construcción de una nueva card (mantiene
-     exactamente el mismo markup que ya usaron
-     tus compañeros, para no romper el estilo).
-     -------------------------------------------- */
-  function buildCard(data) {
+function buildCard(data) {
     const article = document.createElement('article');
     article.className = 'card';
 
@@ -118,10 +84,7 @@
     return article;
   }
 
-  /* --------------------------------------------
-     POST /tareas — crear desde el form principal
-     -------------------------------------------- */
-  function handleCreate(event) {
+function handleCreate(event) {
     event.preventDefault();
 
     const title       = document.getElementById('title').value.trim();
@@ -129,21 +92,16 @@
     const priority    = document.getElementById('priority').value;
     const date        = document.getElementById('date').value;
     const description = document.getElementById('description').value.trim();
-
-    // Validación mínima (el form ya tiene `required`)
     if (!title || !category) {
       showToast('Completa los campos obligatorios', 'delete');
       return;
     }
-
-    // Simular latencia de red
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Guardando...';
     submitBtn.disabled = true;
 
     setTimeout(function () {
-      // Construir la nueva card y agregarla a la sección que corresponde
       const newCard = buildCard({
         title: title,
         category: category,
@@ -156,11 +114,8 @@
       const grid = document.querySelector('#' + sectionId + ' .card-grid');
       if (grid) {
         grid.appendChild(newCard);
-        // Scroll suave hacia la tarjeta nueva
         newCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-
-      // Restaurar form
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
       form.reset();
@@ -169,14 +124,10 @@
     }, 600);
   }
 
-  /* --------------------------------------------
-     PUT /tareas/:id — abrir modal de edición
-     -------------------------------------------- */
-  function openEditModal(card) {
+function openEditModal(card) {
     activeCard = card;
 
     const currentTitle = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
-    // Primer <p> sin badges ni "Fecha:" suele ser la descripción
     const paragraphs = card.querySelectorAll('p');
     let currentDesc = '';
     for (let i = 0; i < paragraphs.length; i++) {
@@ -187,8 +138,6 @@
         break;
       }
     }
-
-    // Detectar categoría según la sección padre
     const parentSection = card.closest('section');
     let categoryValue = 'study';
     if (parentSection) {
@@ -219,8 +168,6 @@
     setTimeout(function () {
       const titleEl = activeCard.querySelector('h3');
       if (titleEl) titleEl.textContent = editTitle.value.trim();
-
-      // Reemplazar la primera descripción que no sea badge ni fecha
       const paragraphs = activeCard.querySelectorAll('p');
       for (let i = 0; i < paragraphs.length; i++) {
         const p = paragraphs[i];
@@ -241,10 +188,7 @@
     }, 500);
   }
 
-  /* --------------------------------------------
-     DELETE /tareas/:id — confirmar y borrar
-     -------------------------------------------- */
-  function openDeleteModal(card) {
+function openDeleteModal(card) {
     activeCard = card;
     const name = card.querySelector('h3') ? card.querySelector('h3').textContent : 'esta tarea';
     deleteName.textContent = '"' + name + '"';
@@ -280,10 +224,7 @@
     }, 450);
   }
 
-  /* --------------------------------------------
-     Búsqueda en vivo (filtra cards por texto)
-     -------------------------------------------- */
-  function handleSearch() {
+function handleSearch() {
     const term = (searchInput.value || '').trim().toLowerCase();
     const cards = document.querySelectorAll(
       '#study-section .card, #sleep-section .card, #wellness-section .card'
@@ -295,18 +236,11 @@
     });
   }
 
-  /* --------------------------------------------
-     Delegación de eventos: un solo listener para
-     todos los botones "Editar" y "Eliminar"
-     (incluye los que se agreguen dinámicamente).
-     -------------------------------------------- */
-  document.addEventListener('click', function (event) {
+document.addEventListener('click', function (event) {
     const target = event.target;
     if (!(target instanceof Element)) return;
 
     const card = target.closest('.card');
-
-    // Solo botones DENTRO de una card en las secciones CRUD
     if (card && target.closest('#study-section, #sleep-section, #wellness-section')) {
       if (target.classList.contains('btn-secondary')) {
         openEditModal(card);
@@ -316,10 +250,7 @@
     }
   });
 
-  /* --------------------------------------------
-     Bindings
-     -------------------------------------------- */
-  if (form) {
+if (form) {
     form.addEventListener('submit', handleCreate);
   }
 
@@ -348,8 +279,6 @@
   if (searchInput) {
     searchInput.addEventListener('input', handleSearch);
   }
-
-  // Tecla ESC cierra cualquier dialog abierto
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       if (editModal.open)   editModal.close();
@@ -357,7 +286,5 @@
       activeCard = null;
     }
   });
-
-  // Mensaje en consola para que sea evidente al revisar
-  console.log('[MinervaMind] Simulación CRUD activa — Oscar / RS0821');
+  
 })();
