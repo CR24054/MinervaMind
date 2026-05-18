@@ -1,10 +1,3 @@
-/* ============================================
-   MinervaMind - Estilos adicionales (Oscar)
-   Solo estilos para el toast de notificación.
-   Reutiliza las variables CSS de styles.css para
-   mantener coherencia con el design system.
-   ============================================ */
-
 .toast {
   position: fixed;
   bottom: var(--space-6, 1.5rem);
@@ -46,7 +39,6 @@
   flex-shrink: 0;
 }
 
-/* Variantes por tipo de operación */
 .toast--success .toast-icon {
   background: var(--color-success, #A8E6CF);
 }
@@ -59,7 +51,6 @@
   background: var(--color-danger, #FFAAA5);
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .toast {
     bottom: 1rem;
@@ -70,7 +61,6 @@
   }
 }
 
-/* Accesibilidad: reducir motion */
 @media (prefers-reduced-motion: reduce) {
   .toast {
     transition: opacity 0.01ms;
