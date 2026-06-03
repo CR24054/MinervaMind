@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinervaMind | Tareas y Hábitos</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+<link rel="stylesheet" href="script.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-top">
+                    <h1>MinervaMind</h1>
+                    <label for="menu-toggle" class="menu-button">☰</label>
+                </div>
+                <p>Estudio Inteligente, Mente Sana</p>
+                <hr>
+                <nav aria-label="Navegación principal">
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+                    <ul class="nav-links">
+                        <li><a href="#dashboard">Inicio</a></li>
+                        <li><a href="#summary-section">Resumen</a></li>
+                        <li><a href="#weekly-progress">Progreso</a></li>
+                        <li><a href="#new-item">Agregar</a></li>
+                        <li><a href="#study-section">Estudio</a></li>
+                        <li><a href="#sleep-section">Sueño</a></li>
+                        <li><a href="#wellness-section">Bienestar</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+        <section id="dashboard">
+            <h2>Panel principal</h2>
+            <p>
+                Organiza tus tareas académicas y hábitos de bienestar para mantener
+                un equilibrio entre productividad, descanso y salud mental.
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="summary-section">
+            <h2>Resumen del día</h2>
+            <div class="card-grid">
+            <article class="card">
+                <h3>Tareas pendientes</h3>
+                <p>2 tareas activas para hoy.</p>
+            </article>
+
+            <article class="card">
+                <h3>Horas de sueño</h3>
+                <p>7 horas registradas.</p>
+            </article>
+
+            <article class="card">
+                <h3>Estado general</h3>
+                <p>Buen progreso académico, pero recuerda tomar descansos.</p>
+            </article>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="weekly-progress">
+            <h2>Progreso semanal</h2>
+            <div class="progress-stats">
+                <div class="stat-card">
+                    <div class="stat-value">4/6</div>
+                    <div class="stat-label">Tareas completadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3/5</div>
+                    <div class="stat-label">Hábitos cumplidos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7h</div>
+                    <div class="stat-label">Promedio de sueño</div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="search-section">
+
+            <h2>Buscar tarea o hábito</h2>
+
+            <input
+                type="search"
+                id="search"
+                name="search"
+                placeholder="Buscar tarea, hábito o categoría...">
+
+        </section>
+
+        <hr>
+
+        <section id="new-item">
+
+            <h2>Agregar nueva tarea o hábito</h2>
+
+            <form>
+
+                <fieldset>
+
+                    <legend>
+                        Información de la tarea o hábito
+                    </legend>
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Nombre
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Ej. Estudiar programación"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Categoría
+                        </label>
+
+                        <select
+                            id="category"
+                            name="category"
+                            required>
+
+                            <option value="">
+                                Selecciona una opción
+                            </option>
+
+                            <option value="study">
+                                Tarea de estudio
+                            </option>
+
+                            <option value="sleep">
+                                Hábito de sueño
+                            </option>
+
+                            <option value="wellness">
+                                Hábito de bienestar
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="priority">
+                            Prioridad
+                        </label>
+
+                        <select
+                            id="priority"
+                            name="priority">
+
+                            <option value="low">
+                                Baja
+                            </option>
+
+                            <option value="medium">
+                                Media
+                            </option>
+
+                            <option value="high">
+                                Alta
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Fecha
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            name="date">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="4"
+                            placeholder="Escribe detalles importantes..."></textarea>
+
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">
+                            Guardar
+                        </button>
+
+                        <button type="reset" class="btn btn-secondary">
+                            Limpiar
+                        </button>
+                    </div>
+
+                </fieldset>
+
+            </form>
+
+        </section>
+
+        <hr>
+
+        <section id="study-section">
+            <h2>Tareas de estudio</h2>
+            <div class="card-grid">
+            <article class="card">
+                <h3>Estudiar Java</h3>
+                <p>Repasar clases, objetos y métodos para la práctica de programación.</p>
+                <p><span class="badge badge-danger">Prioridad Alta</span></p>
+                <p><strong>Fecha:</strong> 2026-05-15</p>
+                <p><span class="badge badge-warning">Pendiente</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <h3>Leer documentación de Spring Boot</h3>
+                <p>Revisar la estructura de controladores, servicios y repositorios.</p>
+                <p><span class="badge badge-info">Prioridad Media</span></p>
+                <p><strong>Fecha:</strong> 2026-05-16</p>
+                <p><span class="badge badge-success">En progreso</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+<article class="card">
+                <h3>Resolver ejercicios de Estructuras de Datos</h3>
+                <p>Practicar recorridos en árboles AVL y balanceo con rotaciones.</p>
+                <p><span class="badge badge-info">Prioridad Media</span></p>
+                <p><strong>Fecha:</strong> 2026-05-19</p>
+                <p><span class="badge badge-warning">Pendiente</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <h3>Repaso de Cálculo III</h3>
+                <p>Ejercicios de integrales por partes y técnicas de sustitución.</p>
+                <p><span class="badge badge-danger">Prioridad Alta</span></p>
+                <p><strong>Fecha:</strong> 2026-05-18</p>
+                <p><span class="badge badge-success">En progreso</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+</div>
+        </section>
+
+        <hr>
+
+        <section id="sleep-section">
+            <h2>Hábitos de sueño</h2>
+            <div class="card-grid">
+            <article class="card">
+                <h3>Dormir 8 horas</h3>
+                <p>Registrar el cumplimiento del descanso diario para mejorar el bienestar.</p>
+                <p><strong>Meta:</strong> 8 horas</p>
+                <p><span class="badge badge-warning">Pendiente</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <h3>Dormir antes de las 11:00 PM</h3>
+                <p>Crear una rutina de descanso evitando estudiar demasiado tarde.</p>
+                <p><strong>Meta:</strong> Antes de las 11:00 PM</p>
+                <p><span class="badge badge-success">En progreso</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="wellness-section">
+            <h2>Hábitos de bienestar</h2>
+            <div class="card-grid">
+            <article class="card">
+                <h3>Tomar agua</h3>
+                <p>Meta diaria: 8 vasos de agua.</p>
+                <p><span class="badge badge-warning">Pendiente</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+
+            <article class="card">
+                <h3>Tomar pausas de estudio</h3>
+                <p>Descansar 15 minutos después de una sesión larga de estudio.</p>
+                <p><span class="badge badge-success">En progreso</span></p>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </div>
+            </article>
+            </div>
+        </section>
+
+        </div>
+    </main>
+
+    <hr>
+
+    <dialog id="edit-modal">
+
+        <h2>Editar tarea o hábito</h2>
+
+        <form>
+
+            <fieldset>
+
+                <legend>
+                    Editar información
+                </legend>
+
+                <div class="form-group">
+
+                    <label for="edit-title">
+                        Nuevo nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-title"
+                        name="edit-title"
+                        placeholder="Editar nombre">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="edit-category">
+                        Categoría
+                    </label>
+
+                    <select
+                        id="edit-category"
+                        name="edit-category">
+
+                        <option value="study">
+                            Tarea de estudio
+                        </option>
+
+                        <option value="sleep">
+                            Hábito de sueño
+                        </option>
+
+                        <option value="wellness">
+                            Hábito de bienestar
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="edit-description">
+                        Nueva descripción
+                    </label>
+
+                    <textarea
+                        id="edit-description"
+                        name="edit-description"
+                        rows="4"
+                        placeholder="Editar descripción"></textarea>
+
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">
+                        Actualizar
+                    </button>
+
+                    <button type="button" class="btn btn-secondary">
+                        Cancelar
+                    </button>
+                </div>
+
+            </fieldset>
+
+        </form>
+
+    </dialog>
+<dialog id="delete-modal">
+
+        <h2>¿Eliminar esta tarea?</h2>
+
+        <form>
+
+            <fieldset>
+
+                <legend>Confirmar eliminación</legend>
+
+                <p>
+                    Estás a punto de eliminar
+                    <strong id="delete-target-name">la tarea seleccionada</strong>.
+                    Esta acción no se puede deshacer.
+                </p>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger" id="confirm-delete-btn">
+                        Sí, eliminar
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" id="cancel-delete-btn">
+                        Cancelar
+                    </button>
+                </div>
+
+            </fieldset>
+
+        </form>
+
+    </dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden>
+        <span class="toast-icon" aria-hidden="true">✓</span>
+        <span class="toast-msg">Operación realizada</span>
+    </div>
+<hr>
+
+    <footer>
+        <div class="container">
+            <p>
+                &copy; 2026 MinervaMind - Organización académica y bienestar universitario
+            </p>
+        </div>
+    </footer>
+<script src="script.js"></script>
+
+</body>
+
+</html>
