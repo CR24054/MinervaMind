@@ -1,0 +1,11 @@
+.sleep-tracker-box {
+  width: 300px;
+  height: 200px;
+  background-color: #f4e8f8;
+  border: 2px dashed #9b59b6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}

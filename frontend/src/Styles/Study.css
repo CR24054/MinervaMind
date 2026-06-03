@@ -1,0 +1,12 @@
+.study-schedule-box {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  background-color: #e8f4f8;
+  border: 2px dashed #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}

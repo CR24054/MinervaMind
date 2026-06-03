@@ -1,0 +1,11 @@
+.mood-tracker-box {
+  width: 300px;
+  height: 200px;
+  background-color: #e8f8ec;
+  border: 2px dashed #2ecc71;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
