@@ -11,7 +11,6 @@ export default function DashboardView() {
       </div>
       
       <div className="dashboard-grid">
-        {/* Resúmenes rápidos */}
         <div className="wireframe-box box-small box-col-1">
           <h3>Sueño de anoche</h3>
           <p>Ej: 6.5 hrs registradas</p>
@@ -27,7 +26,6 @@ export default function DashboardView() {
           <p>Ej: 2 bloques programados</p>
         </div>
 
-        {/* Pomodoro funcional centralizado en el dashboard */}
         <div className="wireframe-box box-pomodoro">
           <div className="pomodoro-timer-section">
             <h2>Temporizador Pomodoro</h2>

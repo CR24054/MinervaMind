@@ -8,7 +8,6 @@ export default function MainContent() {
       </div>
       
       <div className="dashboard-grid">
-        {/* Fila 1: Widgets rápidos */}
         <div className="wireframe-box box-sleep">
           <h3>Registro de Sueño</h3>
           <p>Gráfica de horas dormidas anoche</p>
@@ -24,7 +23,6 @@ export default function MainContent() {
           <p>Días seguidos cumpliendo metas</p>
         </div>
 
-        {/* Fila 2: Área principal de estudio */}
         <div className="wireframe-box box-schedule">
           <h3>Calendario de Estudio</h3>
           <p>Bloques de horarios para materias del ciclo</p>
@@ -35,7 +33,6 @@ export default function MainContent() {
           <p>Reloj para enfocarse y evitar burnout</p>
         </div>
 
-        {/* Fila 3: Tareas pendientes */}
         <div className="wireframe-box box-tasks">
           <h3>Gestor de Tareas (To-Do)</h3>
           <p>Lista de entregas y exámenes próximos</p>

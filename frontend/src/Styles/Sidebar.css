@@ -1,58 +1,184 @@
 .sidebar {
-  width: 260px;
-  background-color: #ffffff;
-  border-right: 1px solid #e2e8f0;
+  width: 80px;
+  background-color: #1e293b;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  height: 400px;
+  border-radius: 20px;
+  position: relative;
+  transition: width 0.3s ease;
 }
 
 .sidebar-logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #334155;
+  font-weight: 800;
   margin-bottom: 40px;
-  text-align: center;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05);
 }
 
 .sidebar-menu {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-item {
-  padding: 12px 16px;
-  background-color: #f1f5f9;
-  border-radius: 8px;
-  color: #475569;
-  font-weight: 500;
-  text-align: center;
-  border: 1px dashed #cbd5e1;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: #94a3b8;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.3s ease;
   text-decoration: none;
-  display: block;
+  background: transparent;
+  border: none;
+  position: relative;
+  z-index: 2;
 }
 
 .sidebar-item:hover {
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .sidebar-item.active {
-  background-color: #3b82f6;
   color: white;
-  border: 1px solid #2563eb;
+}
+
+.bg-flota {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  background-color: #3b82f6;
+  border-radius: 12px;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s ease, height 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .sidebar-profile {
   margin-top: auto;
-  padding: 16px;
-  background-color: #f1f5f9;
-  border-radius: 8px;
-  text-align: center;
-  border: 1px dashed #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  align-items: center;
+}
+
+.sidebar-item::after {
+  content: attr(title);
+  position: absolute;
+  left: 60px;
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  z-index: 20;
+
+}
+
+.sidebar-item:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: calc(70px + env(safe-area-inset-bottom));
+    flex-direction: row;
+    padding: 0px;
+    padding-bottom: env(safe-area-inset-bottom);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+    border-radius: 0px;
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    width: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    border-radius: 0px;
+  }
+  
+  .sidebar-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-profile {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    width: auto;
+    margin-left: 12px;
+    padding-left: 12px;
+    border-left: 1px solid #334155;
+  }
+
+  .sidebar-item {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar-item::after {
+    display: none;
+  }
+
+  .sidebar-item.active {
+    color: white;
+  }
 }
