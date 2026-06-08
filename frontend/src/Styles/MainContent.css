@@ -112,6 +112,45 @@
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .main-wrapper {
+    padding: 16px;
+    padding-bottom: 90px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .box-col-1, .box-col-2, .box-col-3, .box-pomodoro {
+    grid-column: 1;
+  }
+
+  .box-pomodoro {
+    flex-direction: column;
+    padding: 24px 16px;
+  }
+
+  .pomodoro-summary-section {
+    border-left: none;
+    border-top: 2px dashed #fca5a5;
+    padding-left: 0;
+    padding-top: 24px;
+    margin-top: 24px;
+    width: 100%;
+  }
+
+  .pomodoro-stats-grid {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+}
 /* ─────────────────────────────────────
    TASKS PAGE — layout general
 ───────────────────────────────────── */
@@ -629,3 +668,4 @@
     min-width: auto;
   }
 }
+
