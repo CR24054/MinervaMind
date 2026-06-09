@@ -4,8 +4,8 @@
   background-color: #f8fafc;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
+  /*justify-content: center;
+  align-items: center;-*/
 }
 
 @media (max-width: 768px) {
@@ -13,3 +13,4 @@
     flex-direction: column;
   }
 }
+

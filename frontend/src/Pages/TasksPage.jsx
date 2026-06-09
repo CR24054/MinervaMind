@@ -202,7 +202,7 @@ export default function TasksView() {
 
         {/* Formulario */}
         <section className="tasks-card tasks-form-card">
-          <h2>{editingId ? "✏️ Editar tarea" : "✨ Nueva tarea"}</h2>
+          <h2>{editingId ? "✏️ Editar tarea" : " Nueva tarea"}</h2>
           <p className="section-subtitle">
             Agrega una actividad, fecha y prioridad para mantener tu día ordenado.
           </p>
