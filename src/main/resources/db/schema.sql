@@ -19,3 +19,17 @@ CREATE TABLE IF NOT EXISTS user_role (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES usuarios (id_usuario),
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role (id)
 );
+
+CREATE TABLE IF NOT EXISTS moods (
+    id SERIAL PRIMARY KEY,
+    mood_type VARCHAR(50) NOT NULL,
+    stress_level INTEGER,
+    energy_level INTEGER,
+    note TEXT,
+    date DATE NOT NULL,
+    id_usuario BIGINT NOT NULL,
+
+    CONSTRAINT fk_mood_user
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id_usuario)
+);

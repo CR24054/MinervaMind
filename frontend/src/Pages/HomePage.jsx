@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import SleepPage from './SleepPage';
 import TasksPage from './TasksPage';
 import Calendar from './Calendar';
+import MoodPage from '../Components/Mood';
 import '../Styles/HomePage.css';
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       case 'sleep': return <SleepPage />;
       case 'study': return <Calendar />;
       case 'tasks': return <TasksPage />;
+      case 'mood': return <MoodPage />;
       default: return (
         <main className="main-wrapper">
           <div className="dashboard-header">
