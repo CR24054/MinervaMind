@@ -3,7 +3,7 @@ import "../Styles/MainContent.css";
 import logo from "../assets/images.png";
 
 const API_URL = "http://localhost:8080/api/tasks";
-
+const CURRENT_USER_ID = 146;
 const PRIORITY_CONFIG = {
   ALTA:  { label: "Alta",  class: "priority-alta",  icon: "🔴" },
   MEDIA: { label: "Media", class: "priority-media", icon: "🟡" },
@@ -202,7 +202,7 @@ export default function TasksView() {
 
         {/* Formulario */}
         <section className="tasks-card tasks-form-card">
-          <h2>{editingId ? "✏️ Editar tarea" : "✨ Nueva tarea"}</h2>
+          <h2>{editingId ? "✏️ Editar tarea" : " Nueva tarea"}</h2>
           <p className="section-subtitle">
             Agrega una actividad, fecha y prioridad para mantener tu día ordenado.
           </p>
