@@ -5,7 +5,7 @@ import { createMood, updateMood } from "../api/moodApi";
 import "../Styles/MoodForm.css";
 
 // TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 107;
+const CURRENT_USER_ID = 146;
 
 const STRESS_LABELS = ["Muy bajo", "Bajo", "Moderado", "Alto", "Muy alto"];
 const ENERGY_LABELS = ["Agotado", "Bajo", "Estable", "Alto", "Lleno de energía"];

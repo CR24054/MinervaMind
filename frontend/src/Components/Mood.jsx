@@ -16,7 +16,7 @@ import {
 import { Sun, Cloud, Moon, Droplet } from "lucide-react";
 
 // TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 107
+const CURRENT_USER_ID = 146;
 
 export default function MoodPage() {
   const [showForm, setShowForm] = useState(false);

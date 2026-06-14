@@ -1,3 +1,4 @@
+DELETE FROM sleep_records;
 DELETE FROM moods;
 DELETE FROM usuarios;
 

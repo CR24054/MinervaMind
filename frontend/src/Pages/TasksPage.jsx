@@ -3,7 +3,7 @@ import "../Styles/MainContent.css";
 import logo from "../assets/images.png";
 
 const API_URL = "http://localhost:8080/api/tasks";
-
+const CURRENT_USER_ID = 146;
 const PRIORITY_CONFIG = {
   ALTA:  { label: "Alta",  class: "priority-alta",  icon: "🔴" },
   MEDIA: { label: "Media", class: "priority-media", icon: "🟡" },
