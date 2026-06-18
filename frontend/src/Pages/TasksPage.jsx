@@ -2,7 +2,8 @@ import { useEffect, useState, useCallback } from "react";
 import "../Styles/MainContent.css";
 import logo from "../assets/images.png";
 
-const API_URL = "http://localhost:8080/api/tasks";
+import api from "../api/axiosConfig";
+
 
 const PRIORITY_CONFIG = {
   ALTA:  { label: "Alta",  class: "priority-alta",  icon: "🔴" },
@@ -49,8 +50,8 @@ export default function TasksView() {
 
   const loadTasks = useCallback(async () => {
     try {
-      const res = await fetch(API_URL);
-      setTasks(await res.json());
+      const res = await api.get('/api/tasks');
+      setTasks(res.data);
     } catch {
       showToast("Error al cargar las tareas", "error");
     }
@@ -69,11 +70,11 @@ export default function TasksView() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(editingId ? `${API_URL}/${editingId}` : API_URL, {
-        method: editingId ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      if (editingId) {
+        await api.put(`/api/tasks/${editingId}`, form);
+      } else {
+        await api.post('/api/tasks', form);
+      }
       showToast(editingId ? "Tarea actualizada ✓" : "Tarea creada ✓");
       cleanForm();
       loadTasks();
@@ -98,7 +99,7 @@ export default function TasksView() {
 
   const confirmDelete = async () => {
     try {
-      await fetch(`${API_URL}/${deletingId}`, { method: "DELETE" });
+      await api.delete(`/api/tasks/${deletingId}`);
       showToast("Tarea eliminada");
       setDeletingId(null);
       loadTasks();
@@ -109,11 +110,7 @@ export default function TasksView() {
 
   const handleToggleCompleted = async (task) => {
     try {
-      await fetch(`${API_URL}/${task.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...task, completed: !task.completed }),
-      });
+      await api.put(`/api/tasks/${task.id}`, { ...task, completed: !task.completed });
       showToast(task.completed ? "Marcada como pendiente" : "¡Tarea completada! 🎉");
       loadTasks();
     } catch {
@@ -202,7 +199,7 @@ export default function TasksView() {
 
         {/* Formulario */}
         <section className="tasks-card tasks-form-card">
-          <h2>{editingId ? "✏️ Editar tarea" : "✨ Nueva tarea"}</h2>
+          <h2>{editingId ? "✏️ Editar tarea" : " Nueva tarea"}</h2>
           <p className="section-subtitle">
             Agrega una actividad, fecha y prioridad para mantener tu día ordenado.
           </p>

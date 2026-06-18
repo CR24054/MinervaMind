@@ -669,3 +669,63 @@
   }
 }
 
+@media (max-width: 768px) {
+
+  .tasks-topbar {
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tasks-topbar h1 {
+    font-size: 1.7rem;
+  }
+
+  .topbar-right {
+    gap: 12px;
+  }
+
+  .tasks-card {
+    padding: 20px;
+  }
+
+  .task-filters {
+    flex-wrap: wrap;
+  }
+
+  .tasks-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .main-wrapper {
+    padding: 16px;
+  }
+
+  .tasks-topbar h1 {
+    font-size: 1.4rem;
+  }
+
+  .topbar-stats {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .topbar-stat-number {
+    font-size: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .tasks-btn-primary,
+  .tasks-btn-cancel {
+    width: 100%;
+  }
+}
+
+
