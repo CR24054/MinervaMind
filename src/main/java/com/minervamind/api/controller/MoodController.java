@@ -44,7 +44,7 @@ public class MoodController {
         return moodService.findById(id);
     }
 
-    // ← AQUÍ EMPIEZAN LOS NUEVOS MÉTODOS
+
 
     @Operation(summary = "Update mood record")
     @PutMapping("/{id}")

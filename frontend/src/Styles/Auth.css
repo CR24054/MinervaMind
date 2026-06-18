@@ -1,0 +1,213 @@
+.auth-container {
+    min-height: 100vh;
+    background-color: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.auth-card {
+    max-width: 28rem;
+    width: 100%;
+    background-color: #1e293b;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    border: 1px solid #334155;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #60a5fa, #34d399);
+    margin: 0;
+}
+
+.auth-subtitle {
+    color: #94a3b8;
+    margin-top: 0.5rem;
+}
+
+.auth-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #f87171;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.auth-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    color: #34d399;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-left: 0.75rem;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    color: #94a3b8;
+}
+
+.auth-input {
+    display: block;
+    width: 100%;
+    padding-left: 2.5rem;
+    padding-right: 0.75rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    border: 1px solid #475569;
+    border-radius: 0.75rem;
+    background-color: rgba(30, 41, 59, 0.5);
+    color: white;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+.auth-input::placeholder {
+    color: #94a3b8;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.auth-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-image: linear-gradient(to right, #2563eb, #3b82f6);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.auth-button:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #3b82f6, #60a5fa);
+}
+
+.auth-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px #0f172a;
+}
+
+.auth-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.auth-button svg {
+    margin-left: 0.5rem;
+}
+
+.auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+.auth-link {
+    font-weight: 500;
+    color: #60a5fa;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #93c5fd;
+}
+
+.auth-link svg {
+    margin-left: 0.25rem;
+}
+
+.auth-link.back-link svg {
+    margin-left: 0;
+    margin-right: 0.25rem;
+}
+
+/* Colores para el formulario de registro */
+.register-button {
+    background-image: linear-gradient(to right, #059669, #14b8a6);
+}
+
+.register-button:hover:not(:disabled) {
+    background-image: linear-gradient(to right, #10b981, #2dd4bf);
+}
+
+.register-button:focus {
+    box-shadow: 0 0 0 2px #10b981, 0 0 0 4px #0f172a;
+}
+
+.register-link {
+    color: #34d399;
+}
+
+.register-link:hover {
+    color: #6ee7b7;
+}
+
+.register-input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
+}

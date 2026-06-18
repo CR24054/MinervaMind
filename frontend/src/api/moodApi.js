@@ -1,73 +1,54 @@
-const API_BASE_URL = "http://localhost:8080/api/moods";
+import api from './axiosConfig';
 
 export async function createMood(moodData) {
-  const response = await fetch(API_BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(moodData),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error al guardar el estado de ánimo (${response.status})`);
+  try {
+    const response = await api.post('/api/moods', moodData);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error al guardar el estado anímico`);
   }
-
-  return response.json();
 }
 
-export async function getSummary(userId) {
-  const response = await fetch(`${API_BASE_URL}/user/${userId}/summary`);
-
-  if (!response.ok) {
-    throw new Error(`Error al obtener el resumen (${response.status})`);
+export async function getMoodSummary(userId) {
+  try {
+    const response = await api.get(`/api/moods/user/${userId}/summary`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error al obtener el resumen`);
   }
-
-  return response.json();
 }
 
-export async function getRecommendation(userId) {
-  const response = await fetch(`${API_BASE_URL}/user/${userId}/recommendation`);
-
-  if (!response.ok) {
-    throw new Error(`Error al obtener la recomendación (${response.status})`);
+export async function getMoodRecommendation(userId) {
+  try {
+    const response = await api.get(`/api/moods/user/${userId}/recommendation`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error al obtener la recomendación`);
   }
-
-  return response.json();
 }
 
-export async function getMoodsByUser(userId) {
-  const response = await fetch(`${API_BASE_URL}/user/${userId}`);
-
-  if (!response.ok) {
-    throw new Error(`Error al obtener el historial (${response.status})`);
+export async function getMoodByUser(userId) {
+  try {
+    const response = await api.get(`/api/moods/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error al obtener el historial`);
   }
-
-  return response.json();
 }
 
 export async function updateMood(id, moodData) {
-  const response = await fetch(`${API_BASE_URL}/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(moodData),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error al actualizar el registro (${response.status})`);
+  try {
+    const response = await api.put(`/api/moods/${id}`, moodData);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error al actualizar el registro`);
   }
-
-  return response.json();
 }
 
 export async function deleteMood(id) {
-  const response = await fetch(`${API_BASE_URL}/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error al eliminar el registro (${response.status})`);
+  try {
+    await api.delete(`/api/moods/${id}`);
+  } catch (error) {
+    throw new Error(`Error al eliminar el registro`);
   }
 }

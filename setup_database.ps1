@@ -1,5 +1,5 @@
-$env:PGPASSWORD = "12345"
-$pgPath = "C:\Program Files\PostgreSQL\17\bin"
+$env:PGPASSWORD = "soydaniel13"
+$pgPath = "C:\Program Files\PostgreSQL\18\bin"
 
 # Create the database
 Write-Host "Checking if database exists..."

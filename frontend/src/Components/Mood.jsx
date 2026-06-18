@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Plus, Loader2, Pencil, Trash2 } from "lucide-react";
 import MoodForm from "./MoodForm";
 import { MOOD_OPTIONS } from "./moodOptions";
-import { getSummary, getRecommendation, getMoodsByUser, deleteMood } from "../api/moodApi";
+import { getMoodSummary, getMoodRecommendation, getMoodByUser, deleteMood } from "../api/moodApi";
 import "../Styles/Mood.css";
 import {
   LineChart,
@@ -15,10 +15,11 @@ import {
 } from "recharts";
 import { Sun, Cloud, Moon, Droplet } from "lucide-react";
 
-// TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 146;
+import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
 
 export default function MoodPage() {
+  const { userId } = useContext(AuthContext);
   const [showForm, setShowForm] = useState(false);
   const [editingMood, setEditingMood] = useState(null);
   const [summary, setSummary] = useState(null);
@@ -35,10 +36,10 @@ export default function MoodPage() {
     setError(null);
 
     try {
-      const summaryData = await getSummary(CURRENT_USER_ID);
+      const summaryData = await getMoodSummary(userId);
       setSummary(summaryData);
 
-      const historyData = await getMoodsByUser(CURRENT_USER_ID);
+      const historyData = await getMoodByUser(userId);
       const sorted = [...historyData].sort((a, b) => new Date(b.date) - new Date(a.date));
       setHistory(sorted);
 
@@ -47,7 +48,7 @@ export default function MoodPage() {
         setRecommendation(null);
       } else {
         setHasRecords(true);
-        const recommendationData = await getRecommendation(CURRENT_USER_ID);
+        const recommendationData = await getMoodRecommendation(userId);
         setRecommendation(recommendationData);
       }
     } catch (err) {

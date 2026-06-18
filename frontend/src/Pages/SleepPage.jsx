@@ -19,10 +19,11 @@ import {
 } from "../api/sleepApi";
 import "../Styles/Sleep.css";
 
-// TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 146;
+import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
 
 export default function SleepTrackerView() {
+  const { userId } = useContext(AuthContext);
   const [showForm, setShowForm] = useState(false);
   const [editingSleep, setEditingSleep] = useState(null);
   const [summary, setSummary] = useState(null);
@@ -39,10 +40,10 @@ export default function SleepTrackerView() {
     setError(null);
 
     try {
-      const summaryData = await getSleepSummary(CURRENT_USER_ID);
+      const summaryData = await getSleepSummary(userId);
       setSummary(summaryData);
 
-      const historyData = await getSleepByUser(CURRENT_USER_ID);
+      const historyData = await getSleepByUser(userId);
       const sorted = [...historyData].sort((a, b) => new Date(b.date) - new Date(a.date));
       setHistory(sorted);
 
@@ -51,7 +52,7 @@ export default function SleepTrackerView() {
         setRecommendation(null);
       } else {
         setHasRecords(true);
-        const recommendationData = await getSleepRecommendation(CURRENT_USER_ID);
+        const recommendationData = await getSleepRecommendation(userId);
         setRecommendation(recommendationData);
       }
     } catch (err) {

@@ -4,10 +4,11 @@ import { SLEEP_QUALITY_OPTIONS } from "./sleepOptions";
 import { createSleep, updateSleep } from "../api/sleepApi";
 import "../Styles/SleepForm.css";
 
-// TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 146;
+import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
 
 export default function SleepForm({ onClose, editingSleep }) {
+  const { userId } = useContext(AuthContext);
   const isEditing = Boolean(editingSleep);
 
   const [bedTime, setBedTime] = useState(editingSleep?.bedTime?.slice(0, 5) ?? "23:00");
@@ -51,7 +52,7 @@ export default function SleepForm({ onClose, editingSleep }) {
       wakeTime: `${wakeTime}:00`,
       sleepQuality,
       note: note.trim(),
-      userId: CURRENT_USER_ID,
+      userId: userId,
     };
 
     try {

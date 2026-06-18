@@ -4,8 +4,8 @@ import { MOOD_OPTIONS } from "./moodOptions";
 import { createMood, updateMood } from "../api/moodApi";
 import "../Styles/MoodForm.css";
 
-// TODO: reemplazar cuando exista login real
-const CURRENT_USER_ID = 146;
+import { AuthContext } from "../AuthContext";
+import { useContext } from "react";
 
 const STRESS_LABELS = ["Muy bajo", "Bajo", "Moderado", "Alto", "Muy alto"];
 const ENERGY_LABELS = ["Agotado", "Bajo", "Estable", "Alto", "Lleno de energía"];
@@ -16,6 +16,7 @@ function levelLabel(value, labels) {
 }
 
 export default function MoodForm({ onClose, editingMood }) {
+  const { userId } = useContext(AuthContext);
   const isEditing = Boolean(editingMood);
 
   const [moodType, setMoodType] = useState(editingMood?.moodType ?? null);
@@ -44,7 +45,7 @@ export default function MoodForm({ onClose, editingMood }) {
       stressLevel,
       energyLevel,
       note: note.trim(),
-      userId: CURRENT_USER_ID,
+      userId: userId,
     };
 
     try {
