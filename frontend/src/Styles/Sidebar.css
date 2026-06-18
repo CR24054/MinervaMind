@@ -77,6 +77,9 @@
   top: 0;
   left: 0;
   width: 100%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+  box-shadow: 0 0 20px rgba(139,92,246,0.7), 0 0 40px rgba(59,130,246,0.35);
+  animation: glowPulse 2.5s ease-in-out infinite;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,6 +90,11 @@
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s ease, height 0.35s ease;
   z-index: 1;
   pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.7), 0 0 40px rgba(59,130,246,0.35); }
+  50%       { box-shadow: 0 0 30px rgba(139,92,246,1),   0 0 60px rgba(59,130,246,0.6); }
 }
 
 .sidebar-profile {

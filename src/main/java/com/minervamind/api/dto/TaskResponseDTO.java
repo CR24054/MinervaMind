@@ -14,4 +14,5 @@ public class TaskResponseDTO {
     private LocalDate dueDate;
     private String priority;
     private boolean completed;
+    private Long userId;
 }

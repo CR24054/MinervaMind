@@ -1,8 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import "../Styles/MainContent.css";
 import logo from "../assets/images.png";
 
 import api from "../api/axiosConfig";
+import { AuthContext } from "../AuthContext";
 
 
 const PRIORITY_CONFIG = {
@@ -31,6 +32,7 @@ const isOverdue = (dueDate, completed) => {
 };
 
 export default function TasksView() {
+  const { userId } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("ALL");
   const [form, setForm] = useState(EMPTY_FORM);
@@ -49,13 +51,14 @@ export default function TasksView() {
   };
 
   const loadTasks = useCallback(async () => {
+    if (!userId) return;
     try {
-      const res = await api.get('/api/tasks');
+      const res = await api.get(`/api/tasks/user/${userId}`);
       setTasks(res.data);
     } catch {
       showToast("Error al cargar las tareas", "error");
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => { loadTasks(); }, [loadTasks]);
 
@@ -71,9 +74,9 @@ export default function TasksView() {
     e.preventDefault();
     try {
       if (editingId) {
-        await api.put(`/api/tasks/${editingId}`, form);
+        await api.put(`/api/tasks/${editingId}`, { ...form, userId });
       } else {
-        await api.post('/api/tasks', form);
+        await api.post('/api/tasks', { ...form, userId });
       }
       showToast(editingId ? "Tarea actualizada ✓" : "Tarea creada ✓");
       cleanForm();
@@ -290,15 +293,24 @@ export default function TasksView() {
 
           {tasks.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">🌸</div>
-              <h3>No hay tareas todavía</h3>
-              <p>Agrega tu primera tarea para empezar a organizar tu día.</p>
+              <div className="empty-icon">✨</div>
+              <h3>¡Todo limpio por aquí!</h3>
+              <p>Aún no tienes tareas. Empieza agregando una para organizar tu día.</p>
+              <div className="empty-hint">← Usa el formulario de la izquierda</div>
             </div>
           ) : filteredTasks.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">✅</div>
-              <h3>No hay tareas en este filtro</h3>
-              <p>Prueba cambiando el filtro activo.</p>
+              <div className="empty-icon">🎉</div>
+              <h3>
+                {filter === "COMPLETED"
+                  ? "Aún no hay completadas"
+                  : "¡Todo al día!"}
+              </h3>
+              <p>
+                {filter === "COMPLETED"
+                  ? "Completa una tarea para verla aquí."
+                  : "No hay tareas pendientes en este filtro."}
+              </p>
             </div>
           ) : (
             <div className="tasks-list">
@@ -310,19 +322,27 @@ export default function TasksView() {
                 return (
                   <article
                     key={task.id}
-                    className={`task-item ${priorityCfg.class} ${task.completed ? "task-completed" : ""}`}
+                    className={`task-item ${priorityCfg.class} ${task.completed ? "task-completed" : ""} ${overdue ? "task-overdue" : nearDue ? "task-neardue" : ""}`}
                   >
-                    <div className="task-item-top">
-                      <div className={`task-icon-circle icon-${task.priority.toLowerCase()}`}>
-                        {priorityCfg.icon}
+                    {overdue && (
+                      <div className="task-alert-banner banner-overdue">
+                        ⚠️ Tarea vencida
                       </div>
+                    )}
+                    {!overdue && nearDue && (
+                      <div className="task-alert-banner banner-neardue">
+                        ⏰ Vence en menos de 2 días
+                      </div>
+                    )}
+
+                    <div className="task-item-top">
                       <div className="task-info">
                         <h3>{task.title}</h3>
                         <p>{task.description || "Sin descripción"}</p>
                       </div>
-                      <div className={`task-count-circle task-count-${task.priority.toLowerCase()}`}>
-                        {task.completed ? "✓" : "!"}
-                      </div>
+                      <span className={`priority-chip chip-${task.priority.toLowerCase()}`}>
+                        {priorityCfg.label}
+                      </span>
                     </div>
 
                     <div className="task-item-bottom">

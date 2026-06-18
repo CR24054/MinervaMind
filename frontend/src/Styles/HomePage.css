@@ -1,11 +1,9 @@
 .app-layout {
   display: flex;
   height: 100vh;
-  background-color: #f8fafc;
+  background: linear-gradient(160deg, #f8f7ff 0%, #f0eeff 40%, #f5f8ff 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
-  /*justify-content: center;
-  align-items: center;-*/
 }
 
 @media (max-width: 768px) {

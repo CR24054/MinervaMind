@@ -12,8 +12,8 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f172a] flex justify-center items-center">
-        <div className="text-white text-xl">Cargando...</div>
+      <div style={{ minHeight: '100vh', background: '#0f172a', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ color: 'white', fontSize: '1.25rem' }}>Cargando...</div>
       </div>
     );
   }
