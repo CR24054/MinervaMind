@@ -1,0 +1,49 @@
+
+services:
+  # Base de datos 
+  db:
+    image: postgres:15-alpine
+    container_name: minervamind-db
+    environment:
+      POSTGRES_USER: Postgres
+      POSTGRES_PASSWORD: Toby123$
+      POSTGRES_DB: minervamind
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data 
+    restart: unless-stopped
+      
+  # Backend
+  backend:
+    build: 
+       context: .
+       dockerfile: ./src/Dockerfile
+    container_name: minervamind-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/minervamind
+      - SPRING_DATASOURCE_USERNAME=Postgres
+      - SPRING_DATASOURCE_PASSWORD=Toby123$
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db 
+    restart: unless-stopped
+
+#frontend   
+  frontend: 
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: minervamind-frontend
+    ports:
+      - "80:80" # Exponemos el puerto 80 para el frontend
+    depends_on:
+      - backend # Aseguramos que el backend esté listo antes de iniciar el frontend 
+    restart: unless-stopped
+
+# Volúmenes para persistencia de datos
+volumes:
+  postgres_data:  
+
+   

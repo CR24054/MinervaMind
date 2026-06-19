@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Sidebar from '../Components/Sidebar';
+import Sidebar from '../components/Sidebar';
 import Dashboard from './Dashboard';
 import SleepPage from './SleepPage';
 import TasksPage from './TasksPage';
 import Calendar from './Calendar';
-import MoodPage from '../Components/Mood';
+import MoodPage from '../components/Mood';
 import '../Styles/HomePage.css';
 
 export default function HomePage() {

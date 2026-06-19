@@ -9,8 +9,8 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-import SleepForm from "../Components/SleepForm";
-import { SLEEP_QUALITY_OPTIONS } from "../Components/sleepOptions";
+import SleepForm from "../components/SleepForm";
+import { SLEEP_QUALITY_OPTIONS } from "../components/sleepOptions";
 import {
   getSleepSummary,
   getSleepRecommendation,
