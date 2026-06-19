@@ -26,10 +26,17 @@ public class TaskService {
         task.setDueDate(requestDTO.getDueDate());
         task.setPriority(requestDTO.getPriority());
         task.setCompleted(requestDTO.isCompleted());
+        task.setUserId(requestDTO.getUserId());
 
         Task savedTask = taskRepository.save(task);
 
         return mapToResponseDTO(savedTask);
+    }
+
+    public List<TaskResponseDTO> findByUser(Long userId) {
+        List<TaskResponseDTO> tasks = new ArrayList<>();
+        taskRepository.findByUserId(userId).forEach(task -> tasks.add(mapToResponseDTO(task)));
+        return tasks;
     }
 
     public List<TaskResponseDTO> findAll() {
@@ -78,7 +85,8 @@ public class TaskService {
                 task.getDescription(),
                 task.getDueDate(),
                 task.getPriority(),
-                task.isCompleted()
+                task.isCompleted(),
+                task.getUserId()
         );
     }
 }

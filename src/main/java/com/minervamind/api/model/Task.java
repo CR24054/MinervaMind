@@ -25,4 +25,6 @@ public class Task {
     private String priority;
 
     private boolean completed;
+
+    private Long userId;
 }

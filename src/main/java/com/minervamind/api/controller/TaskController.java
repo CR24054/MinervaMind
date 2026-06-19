@@ -28,6 +28,11 @@ public class TaskController {
         return taskService.findAll();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<TaskResponseDTO> findByUser(@PathVariable Long userId) {
+        return taskService.findByUser(userId);
+    }
+
     @GetMapping("/{id}")
     public TaskResponseDTO findById(@PathVariable Long id) {
         return taskService.findById(id);

@@ -1,0 +1,415 @@
+/* ═══════════════════════════════════════
+   DASHBOARD — bento grid redesign
+═══════════════════════════════════════ */
+
+.dash-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 32px 48px;
+  overflow-y: auto;
+  min-height: 0;
+  background: transparent;
+  animation: dashFadeIn 0.45s ease both;
+}
+
+@keyframes dashFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── BIENVENIDA ─── */
+.dash-welcome {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-left: 5px solid #7c3aed;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+  flex-shrink: 0;
+}
+
+.dash-welcome-text { flex: 1; min-width: 0; }
+
+.dash-date {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #a78bfa;
+  text-transform: capitalize;
+  letter-spacing: 0.05em;
+  margin: 0 0 4px;
+}
+
+.dash-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  margin: 0 0 6px;
+  letter-spacing: -0.4px;
+  line-height: 1.1;
+}
+
+.dash-quote {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+}
+
+.dash-mood-trigger {
+  background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+  border: 1px solid #ddd6fe;
+  border-radius: 999px;
+  padding: 11px 22px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #7c3aed;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dash-mood-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.18);
+}
+
+/* ─── BENTO GRID ─── */
+.dash-bento {
+  display: grid;
+  grid-template-columns: 290px 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  flex: 1;
+}
+
+/* ─── POMODORO ─── */
+.dash-bento-pomo {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  background: linear-gradient(165deg, #1e1b4b 0%, #312e81 55%, #4c1d95 100%);
+  border-radius: 28px;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 20px 48px rgba(49, 46, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-bento-pomo::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -50px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+.dash-pomo-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(196, 181, 253, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.dash-pomo-hint {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+  text-align: center;
+  min-height: 18px;
+}
+
+/* Ring */
+.dash-pomo-ring-wrap {
+  position: relative;
+  width: 155px;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-pomo-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+
+.pomo-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.1);
+  stroke-width: 10;
+}
+
+.pomo-progress {
+  fill: none;
+  stroke: #a78bfa;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 8px rgba(167,139,250,0.8));
+}
+
+.pomo-progress--running {
+  animation: pomoGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pomoGlow {
+  from { filter: drop-shadow(0 0 5px rgba(167,139,250,0.5)); }
+  to   { filter: drop-shadow(0 0 18px rgba(167,139,250,1)); }
+}
+
+.dash-pomo-time {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(167,139,250,0.35);
+}
+
+/* Buttons */
+.dash-pomo-btns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dash-pomo-main,
+.dash-pomo-reset {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.dash-pomo-main {
+  padding: 11px 26px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: white;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 20px rgba(124,58,237,0.45);
+}
+
+.dash-pomo-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(124,58,237,0.6);
+}
+
+.dash-pomo-reset {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 1rem;
+}
+
+.dash-pomo-reset:hover {
+  background: rgba(255,255,255,0.2);
+  transform: rotate(-30deg);
+}
+
+/* Session dots */
+.dash-pomo-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dash-pomo-dot {
+  width: 24px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.3s ease;
+}
+
+.dash-pomo-dot.done {
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.4);
+}
+
+.dash-pomo-count {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  margin: 0;
+  text-align: center;
+}
+
+/* ─── STAT CARDS ─── */
+.dash-bento-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 4px 20px rgba(109, 40, 217, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(109, 40, 217, 0.12);
+}
+
+.dash-bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 24px 24px 0 0;
+}
+
+.dash-bento-sleep::before { background: linear-gradient(90deg, #818cf8, #c084fc); }
+.dash-bento-tasks::before { background: linear-gradient(90deg, #34d399, #059669); }
+.dash-bento-focus::before { background: linear-gradient(90deg, #fb923c, #f43f5e); }
+
+.dash-card-emoji {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.dash-card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.dash-card-value {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  line-height: 1;
+  margin: 4px 0 0;
+}
+
+.dash-card-unit {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.dash-card-bar {
+  height: 5px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.dash-card-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dash-bento-sleep .dash-card-fill { background: linear-gradient(90deg, #818cf8, #c084fc); }
+.dash-bento-tasks .dash-card-fill { background: linear-gradient(90deg, #34d399, #059669); }
+.dash-bento-focus .dash-card-fill { background: linear-gradient(90deg, #fb923c, #f43f5e); }
+
+/* Focus card — ancha (fila 2, cols 2-3) */
+.dash-bento-focus {
+  grid-column: 2 / 4;
+  grid-row: 2;
+}
+
+.dash-focus-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dash-focus-of {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.dash-focus-dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.dash-focus-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.dash-focus-dot.done {
+  background: linear-gradient(135deg, #fb923c, #f43f5e);
+  box-shadow: 0 3px 10px rgba(251, 146, 60, 0.35);
+}
+
+.dash-card-bar--wide {
+  margin-top: 14px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .dash-bento {
+    grid-template-columns: 260px 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .dash-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dash-bento-pomo {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  .dash-bento-focus {
+    grid-column: 1 / 3;
+    grid-row: 4;
+  }
+}
+
+@media (max-width: 600px) {
+  .dash-wrapper { padding: 16px 16px 80px; }
+  .dash-welcome {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .dash-mood-trigger { width: 100%; text-align: center; }
+  .dash-bento {
+    grid-template-columns: 1fr;
+  }
+  .dash-bento-pomo  { grid-column: 1; grid-row: auto; }
+  .dash-bento-focus { grid-column: 1; grid-row: auto; }
+  .dash-title { font-size: 1.5rem; }
+  .dash-focus-dots { justify-content: flex-start; }
+}
