@@ -39,7 +39,7 @@ function getDate() {
 
 export default function DashboardView() {
   const { userId } = useContext(AuthContext);
-  const [showMood, setShowMood] = useState(true);
+  const [showMood, setShowMood] = useState(false);
   const greeting = getGreeting();
   const quote = QUOTES[new Date().getDay() % QUOTES.length];
 
@@ -59,6 +59,15 @@ export default function DashboardView() {
     api.get(`/api/tasks/user/${userId}`)
       .then(r => setPending(r.data.filter(t => !t.completed).length))
       .catch(() => setPending(null));
+
+    // Revisar si han pasado 12 horas desde el último prompt de estado de ánimo
+    const lastPrompt = localStorage.getItem(`lastMoodPrompt_${userId}`);
+    const now = Date.now();
+    if (!lastPrompt || (now - parseInt(lastPrompt, 10)) > 12 * 60 * 60 * 1000) {
+      setShowMood(true);
+      // Guardamos la hora inmediatamente para que si refrescan la página, no vuelva a salir
+      localStorage.setItem(`lastMoodPrompt_${userId}`, now.toString());
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -88,7 +97,10 @@ export default function DashboardView() {
 
   return (
     <main className="dash-wrapper">
-      {showMood && <MoodForm onClose={() => setShowMood(false)} />}
+      {showMood && <MoodForm onClose={() => {
+        setShowMood(false);
+        localStorage.setItem(`lastMoodPrompt_${userId}`, Date.now().toString());
+      }} />}
 
       {/* ── BIENVENIDA ── */}
       <header className="dash-welcome">

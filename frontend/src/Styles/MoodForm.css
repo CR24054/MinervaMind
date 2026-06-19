@@ -53,11 +53,7 @@
   to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
-/* ── SCROLLABLE CONTENT ── */
-.mood-card > *:not(.mood-card-header) {
-  padding-left: 28px;
-  padding-right: 28px;
-}
+/* ── HEADER CON GRADIENTE ── */
 
 /* ── HEADER CON GRADIENTE ── */
 .mood-card-header,
