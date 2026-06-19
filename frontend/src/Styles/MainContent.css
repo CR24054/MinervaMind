@@ -477,6 +477,11 @@
   font-size: 1.45rem;
   letter-spacing: -0.2px;
 }
+.tasks-form-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .section-subtitle {
   color: #7c728f;
   margin-bottom: 22px;
@@ -686,7 +691,9 @@
 
 /* Priority chip badges */
 .priority-chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 4px 12px;
   border-radius: 999px;
   font-size: 0.7rem;
@@ -766,11 +773,18 @@
 }
 
 .task-date-row { margin-top: 0; }
+.task-date-row small {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
 .date-overdue { color: #dc2626 !important; font-weight: 700; }
 .date-near    { color: #d97706 !important; font-weight: 700; }
 
 .status-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 7px 12px;
   border-radius: 999px;
   font-size: 0.78rem;
@@ -784,6 +798,15 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 4px;
+}
+.tasks-btn-primary,
+.tasks-btn-secondary,
+.tasks-btn-danger,
+.tasks-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 /* ─────────────────────────────────────
@@ -818,7 +841,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.6rem;
+  color: #8b5cf6;
   margin-bottom: 20px;
   box-shadow: 0 16px 32px rgba(124, 58, 237, 0.15);
   animation: emptyBounce 3s ease-in-out infinite;
@@ -889,7 +912,17 @@
   max-width: 360px;
   width: 90%;
 }
-.modal-icon { font-size: 2.4rem; margin-bottom: 12px; }
+.modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+  background: #fef2f2;
+  color: #dc2626;
+}
 .modal-card h3 { color: #1e1b4b; margin: 0 0 8px; font-size: 1.3rem; }
 .modal-card p  { color: #7c728f; margin-bottom: 24px; }
 .modal-actions { display: flex; gap: 12px; justify-content: center; }
@@ -970,5 +1003,4 @@
     width: 100%;
   }
 }
-
 
