@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Loader2, Check, AlertCircle, X } from "lucide-react";
+import { useState, useRef } from "react";
+import { Loader2, Check, AlertCircle, X, LucideX } from "lucide-react";
 import { MOOD_OPTIONS } from "./moodOptions";
 import { createMood, updateMood } from "../api/moodApi";
 import "../Styles/MoodForm.css";
@@ -25,11 +25,14 @@ export default function MoodForm({ onClose, editingMood }) {
   const [note, setNote] = useState(editingMood?.note ?? "");
   const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const isSubmitting = useRef(false);
 
   const selectedMood = MOOD_OPTIONS.find((m) => m.value === moodType);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (isSubmitting.current) return;
 
     if (!moodType) {
       setErrorMessage("Elige cómo te sientes antes de guardar.");
@@ -39,6 +42,7 @@ export default function MoodForm({ onClose, editingMood }) {
 
     setStatus("loading");
     setErrorMessage("");
+    isSubmitting.current = true;
 
     const payload = {
       moodType,
@@ -63,6 +67,8 @@ export default function MoodForm({ onClose, editingMood }) {
     } catch (err) {
       setErrorMessage(err.message || "No se pudo guardar tu registro. Intenta de nuevo.");
       setStatus("error");
+    } finally {
+      isSubmitting.current = false;
     }
   }
 
@@ -75,7 +81,7 @@ export default function MoodForm({ onClose, editingMood }) {
           onClick={onClose}
           aria-label="Cerrar"
         >
-          <X size={20} />
+          <LucideX size={20} color="#FFFFFF"/>
         </button>
 
         <header className="mood-header">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Loader2, Check, AlertCircle, X } from "lucide-react";
 import { SLEEP_QUALITY_OPTIONS } from "./sleepOptions";
 import { createSleep, updateSleep } from "../api/sleepApi";
@@ -17,6 +17,7 @@ export default function SleepForm({ onClose, editingSleep }) {
   const [note, setNote] = useState(editingSleep?.note ?? "");
   const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const isSubmitting = useRef(false);
 
   const selectedQuality = SLEEP_QUALITY_OPTIONS.find((q) => q.value === sleepQuality);
 
@@ -37,6 +38,8 @@ export default function SleepForm({ onClose, editingSleep }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    if (isSubmitting.current) return;
 
     if (!sleepQuality) {
       setErrorMessage("Selecciona la calidad de tu sueño antes de guardar.");
@@ -46,6 +49,7 @@ export default function SleepForm({ onClose, editingSleep }) {
 
     setStatus("loading");
     setErrorMessage("");
+    isSubmitting.current = true;
 
     const payload = {
       bedTime: `${bedTime}:00`,
@@ -70,6 +74,8 @@ export default function SleepForm({ onClose, editingSleep }) {
     } catch (err) {
       setErrorMessage(err.message || "No se pudo guardar tu registro. Intenta de nuevo.");
       setStatus("error");
+    } finally {
+      isSubmitting.current = false;
     }
   }
 
