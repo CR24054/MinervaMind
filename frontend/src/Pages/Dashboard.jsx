@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import '../Styles/Dashboard.css';
-import MoodForm from '../Components/MoodForm';
+import MoodForm from '../components/MoodForm';
 import { AuthContext } from '../AuthContext';
 import { getSleepSummary } from '../api/sleepApi';
 import api from '../api/axiosConfig';

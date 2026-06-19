@@ -1,0 +1,15 @@
+.git
+.gitignore
+.gitattributes
+.github
+.gitkeep
+target
+node_modules
+.mvn
+README.md
+mvnw
+mvnw.cmd
+setup_database.ps1
+HELP.md
+frontend_base
+database

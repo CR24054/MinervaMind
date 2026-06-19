@@ -6,6 +6,7 @@ import com.minervamind.api.model.Task;
 import com.minervamind.api.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class TaskService {
     public List<TaskResponseDTO> findByUser(Long userId) {
         List<TaskResponseDTO> tasks = new ArrayList<>();
         taskRepository.findByUserId(userId).forEach(task -> tasks.add(mapToResponseDTO(task)));
+        return tasks;
+    }
+
+    public List<TaskResponseDTO> findByUserAndDate(Long userId, LocalDate date) {
+        List<TaskResponseDTO> tasks = new ArrayList<>();
+        taskRepository.findByUserIdAndDueDate(userId, date).forEach(task -> tasks.add(mapToResponseDTO(task)));
         return tasks;
     }
 

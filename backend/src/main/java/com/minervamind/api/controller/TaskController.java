@@ -5,6 +5,7 @@ import com.minervamind.api.dto.TaskResponseDTO;
 import com.minervamind.api.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,13 @@ public class TaskController {
     @GetMapping("/user/{userId}")
     public List<TaskResponseDTO> findByUser(@PathVariable Long userId) {
         return taskService.findByUser(userId);
+    }
+
+    @GetMapping("/user/{userId}/date/{date}")
+    public List<TaskResponseDTO> findByUserAndDate(
+            @PathVariable Long userId,
+            @PathVariable String date) {
+        return taskService.findByUserAndDate(userId, LocalDate.parse(date));
     }
 
     @GetMapping("/{id}")
