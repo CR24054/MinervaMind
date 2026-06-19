@@ -1,15 +1,19 @@
 import { useEffect, useState, useCallback, useContext } from "react";
 import "../Styles/MainContent.css";
 import logo from "../assets/images.png";
+import {
+  Pencil, Trash2, Plus, Sparkles, PartyPopper, AlertTriangle, Clock,
+  Calendar as CalendarIcon, Check, Undo2, ChevronUp, Minus, ChevronDown,
+} from "lucide-react";
 
 import api from "../api/axiosConfig";
 import { AuthContext } from "../AuthContext";
 
 
 const PRIORITY_CONFIG = {
-  ALTA:  { label: "Alta",  class: "priority-alta",  icon: "🔴" },
-  MEDIA: { label: "Media", class: "priority-media", icon: "🟡" },
-  BAJA:  { label: "Baja",  class: "priority-baja",  icon: "🟢" },
+  ALTA:  { label: "Alta",  class: "priority-alta",  Icon: ChevronUp },
+  MEDIA: { label: "Media", class: "priority-media", Icon: Minus },
+  BAJA:  { label: "Baja",  class: "priority-baja",  Icon: ChevronDown },
 };
 
 const EMPTY_FORM = {
@@ -78,7 +82,7 @@ export default function TasksView() {
       } else {
         await api.post('/api/tasks', { ...form, userId });
       }
-      showToast(editingId ? "Tarea actualizada ✓" : "Tarea creada ✓");
+      showToast(editingId ? "Tarea actualizada" : "Tarea creada");
       cleanForm();
       loadTasks();
     } catch {
@@ -114,7 +118,7 @@ export default function TasksView() {
   const handleToggleCompleted = async (task) => {
     try {
       await api.put(`/api/tasks/${task.id}`, { ...task, completed: !task.completed });
-      showToast(task.completed ? "Marcada como pendiente" : "¡Tarea completada! 🎉");
+      showToast(task.completed ? "Marcada como pendiente" : "¡Tarea completada!");
       loadTasks();
     } catch {
       showToast("Error al actualizar", "error");
@@ -139,7 +143,7 @@ export default function TasksView() {
       {deletingId && (
         <div className="modal-overlay">
           <div className="modal-card">
-            <div className="modal-icon">🗑️</div>
+            <div className="modal-icon"><Trash2 size={30} /></div>
             <h3>¿Eliminar tarea?</h3>
             <p>Esta acción no se puede deshacer.</p>
             <div className="modal-actions">
@@ -202,7 +206,9 @@ export default function TasksView() {
 
         {/* Formulario */}
         <section className="tasks-card tasks-form-card">
-          <h2>{editingId ? "✏️ Editar tarea" : " Nueva tarea"}</h2>
+          <h2 className="tasks-form-title">
+            {editingId ? <><Pencil size={19} /> Editar tarea</> : <><Plus size={19} /> Nueva tarea</>}
+          </h2>
           <p className="section-subtitle">
             Agrega una actividad, fecha y prioridad para mantener tu día ordenado.
           </p>
@@ -244,8 +250,8 @@ export default function TasksView() {
             <label>
               Prioridad
               <select name="priority" value={form.priority} onChange={handleChange}>
-                {Object.entries(PRIORITY_CONFIG).map(([val, { label, icon }]) => (
-                  <option key={val} value={val}>{icon} {label}</option>
+                {Object.entries(PRIORITY_CONFIG).map(([val, { label }]) => (
+                  <option key={val} value={val}>{label}</option>
                 ))}
               </select>
             </label>
@@ -293,14 +299,14 @@ export default function TasksView() {
 
           {tasks.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">✨</div>
+              <div className="empty-icon"><Sparkles size={36} /></div>
               <h3>¡Todo limpio por aquí!</h3>
               <p>Aún no tienes tareas. Empieza agregando una para organizar tu día.</p>
-              <div className="empty-hint">← Usa el formulario de la izquierda</div>
+              <div className="empty-hint">Usa el formulario de la izquierda</div>
             </div>
           ) : filteredTasks.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">🎉</div>
+              <div className="empty-icon"><PartyPopper size={36} /></div>
               <h3>
                 {filter === "COMPLETED"
                   ? "Aún no hay completadas"
@@ -326,12 +332,12 @@ export default function TasksView() {
                   >
                     {overdue && (
                       <div className="task-alert-banner banner-overdue">
-                        ⚠️ Tarea vencida
+                        <AlertTriangle size={14} /> Tarea vencida
                       </div>
                     )}
                     {!overdue && nearDue && (
                       <div className="task-alert-banner banner-neardue">
-                        ⏰ Vence en menos de 2 días
+                        <Clock size={14} /> Vence en menos de 2 días
                       </div>
                     )}
 
@@ -341,31 +347,32 @@ export default function TasksView() {
                         <p>{task.description || "Sin descripción"}</p>
                       </div>
                       <span className={`priority-chip chip-${task.priority.toLowerCase()}`}>
-                        {priorityCfg.label}
+                        <priorityCfg.Icon size={12} /> {priorityCfg.label}
                       </span>
                     </div>
 
                     <div className="task-item-bottom">
                       <div className="task-date-row">
                         <small className={overdue ? "date-overdue" : nearDue ? "date-near" : ""}>
-                          {overdue ? "⚠️ Vencida: " : nearDue ? "⏰ Vence pronto: " : "📅 "}
+                          {overdue ? <AlertTriangle size={13} /> : nearDue ? <Clock size={13} /> : <CalendarIcon size={13} />}
+                          {" "}{overdue ? "Vencida: " : nearDue ? "Vence pronto: " : ""}
                           {task.dueDate || "Sin fecha"}
                         </small>
                       </div>
                       <span className={`status-badge ${task.completed ? "status-done" : "status-pending"}`}>
-                        {task.completed ? "✓ Completada" : "· Pendiente"}
+                        {task.completed ? <><Check size={13} /> Completada</> : "· Pendiente"}
                       </span>
                     </div>
 
                     <div className="task-actions">
                       <button className="tasks-btn-secondary" onClick={() => handleToggleCompleted(task)}>
-                        {task.completed ? "↩ Reabrir" : "✓ Completar"}
+                        {task.completed ? <><Undo2 size={14} /> Reabrir</> : <><Check size={14} /> Completar</>}
                       </button>
                       <button className="tasks-btn-secondary" onClick={() => handleEdit(task)}>
-                        ✏️ Editar
+                        <Pencil size={14} /> Editar
                       </button>
                       <button className="tasks-btn-danger" onClick={() => handleDelete(task.id)}>
-                        🗑️ Eliminar
+                        <Trash2 size={14} /> Eliminar
                       </button>
                     </div>
                   </article>
