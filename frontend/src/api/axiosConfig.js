@@ -21,7 +21,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
+        const isUnauthorized = error.response?.status === 401 || error.response?.status === 403;
+        const isCorsOrNetworkError = error.message === 'Network Error';
+        
+        if (isUnauthorized || isCorsOrNetworkError) {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             window.location.href = '/login';

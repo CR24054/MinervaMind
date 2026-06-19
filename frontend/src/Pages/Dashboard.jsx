@@ -4,6 +4,10 @@ import MoodForm from '../components/MoodForm';
 import { AuthContext } from '../AuthContext';
 import { getSleepSummary } from '../api/sleepApi';
 import api from '../api/axiosConfig';
+import {
+  Sun, CloudSun, Moon, Smile, Timer, Flame, CheckCircle2, Target,
+  Play, Pause, RotateCcw,
+} from 'lucide-react';
 
 const WORK_MINUTES = 25;
 const WORK_SECONDS = WORK_MINUTES * 60;
@@ -20,9 +24,9 @@ const QUOTES = [
 
 function getGreeting() {
   const hour = new Date().getHours();
-  if (hour >= 5 && hour < 12)  return { text: 'Buenos días',  emoji: '☀️' };
-  if (hour >= 12 && hour < 18) return { text: 'Buenas tardes', emoji: '🌤️' };
-  return { text: 'Buenas noches', emoji: '🌙' };
+  if (hour >= 5 && hour < 12)  return { text: 'Buenos días',  Icon: Sun };
+  if (hour >= 12 && hour < 18) return { text: 'Buenas tardes', Icon: CloudSun };
+  return { text: 'Buenas noches', Icon: Moon };
 }
 
 function fmt(secs) {
@@ -39,7 +43,7 @@ function getDate() {
 
 export default function DashboardView() {
   const { userId } = useContext(AuthContext);
-  const [showMood, setShowMood] = useState(true);
+  const [showMood, setShowMood] = useState(false);
   const greeting = getGreeting();
   const quote = QUOTES[new Date().getDay() % QUOTES.length];
 
@@ -59,6 +63,15 @@ export default function DashboardView() {
     api.get(`/api/tasks/user/${userId}`)
       .then(r => setPending(r.data.filter(t => !t.completed).length))
       .catch(() => setPending(null));
+
+    // Revisar si han pasado 12 horas desde el último prompt de estado de ánimo
+    const lastPrompt = localStorage.getItem(`lastMoodPrompt_${userId}`);
+    const now = Date.now();
+    if (!lastPrompt || (now - parseInt(lastPrompt, 10)) > 12 * 60 * 60 * 1000) {
+      setShowMood(true);
+      // Guardamos la hora inmediatamente para que si refrescan la página, no vuelva a salir
+      localStorage.setItem(`lastMoodPrompt_${userId}`, now.toString());
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -88,17 +101,23 @@ export default function DashboardView() {
 
   return (
     <main className="dash-wrapper">
-      {showMood && <MoodForm onClose={() => setShowMood(false)} />}
+      {showMood && <MoodForm onClose={() => {
+        setShowMood(false);
+        localStorage.setItem(`lastMoodPrompt_${userId}`, Date.now().toString());
+      }} />}
 
       {/* ── BIENVENIDA ── */}
       <header className="dash-welcome">
         <div className="dash-welcome-text">
           <p className="dash-date">{getDate()}</p>
-          <h1 className="dash-title">{greeting.emoji} {greeting.text}</h1>
+          <h1 className="dash-title">
+            <greeting.Icon className="dash-title-icon" size={28} />
+            {greeting.text}
+          </h1>
           <p className="dash-quote">"{quote}"</p>
         </div>
         <button className="dash-mood-trigger" onClick={() => setShowMood(true)}>
-          😊 ¿Cómo te sientes hoy?
+          <Smile size={18} /> ¿Cómo te sientes hoy?
         </button>
       </header>
 
@@ -107,9 +126,11 @@ export default function DashboardView() {
 
         {/* POMODORO — card grande, col izquierda */}
         <div className="dash-bento-pomo">
-          <p className="dash-pomo-eyebrow">🍅 Temporizador Pomodoro</p>
+          <p className="dash-pomo-eyebrow"><Timer size={14} /> Temporizador Pomodoro</p>
           <p className="dash-pomo-hint">
-            {running ? '¡Mantén el enfoque! 💪' : 'Concéntrate 25 min, descansa 5.'}
+            {running ? (
+              <><Flame size={13} /> ¡Mantén el enfoque!</>
+            ) : 'Concéntrate 25 min, descansa 5.'}
           </p>
 
           <div className="dash-pomo-ring-wrap">
@@ -127,10 +148,12 @@ export default function DashboardView() {
 
           <div className="dash-pomo-btns">
             <button className="dash-pomo-main" onClick={toggleTimer}>
-              {running ? '⏸ Pausar' : '▶ Iniciar'}
+              {running ? <><Pause size={15} /> Pausar</> : <><Play size={15} /> Iniciar</>}
             </button>
             {secs !== WORK_SECONDS && (
-              <button className="dash-pomo-reset" onClick={resetTimer}>↺</button>
+              <button className="dash-pomo-reset" onClick={resetTimer}>
+                <RotateCcw size={17} />
+              </button>
             )}
           </div>
 
@@ -148,7 +171,7 @@ export default function DashboardView() {
 
         {/* SUEÑO */}
         <div className="dash-bento-card dash-bento-sleep">
-          <span className="dash-card-emoji">🌙</span>
+          <span className="dash-card-icon dash-card-icon--sleep"><Moon size={20} /></span>
           <p className="dash-card-label">Sueño promedio</p>
           <p className="dash-card-value">
             {sleepHrs !== null ? sleepHrs.toFixed(1) : '—'}
@@ -166,7 +189,7 @@ export default function DashboardView() {
 
         {/* TAREAS */}
         <div className="dash-bento-card dash-bento-tasks">
-          <span className="dash-card-emoji">✅</span>
+          <span className="dash-card-icon dash-card-icon--tasks"><CheckCircle2 size={20} /></span>
           <p className="dash-card-label">Tareas pendientes</p>
           <p className="dash-card-value">
             {pendingTasks !== null ? pendingTasks : '—'}
@@ -186,7 +209,7 @@ export default function DashboardView() {
         <div className="dash-bento-card dash-bento-focus">
           <div className="dash-focus-row">
             <div>
-              <span className="dash-card-emoji">🎯</span>
+              <span className="dash-card-icon dash-card-icon--focus"><Target size={20} /></span>
               <p className="dash-card-label">Meta de sesiones hoy</p>
               <p className="dash-card-value">
                 {sessions}
