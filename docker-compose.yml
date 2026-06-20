@@ -6,7 +6,7 @@ services:
     container_name: minervamind-db
     environment:
       POSTGRES_USER: Postgres
-      POSTGRES_PASSWORD: Toby123$
+      POSTGRES_PASSWORD: Toby123$$
       POSTGRES_DB: minervamind
     ports:
       - "5432:5432"
@@ -16,14 +16,14 @@ services:
       
   # Backend
   backend:
-    build: 
-       context: .
-       dockerfile: ./src/Dockerfile
+    build:
+       context: ./backend
+       dockerfile: src/Dockerfile
     container_name: minervamind-backend
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/minervamind
       - SPRING_DATASOURCE_USERNAME=Postgres
-      - SPRING_DATASOURCE_PASSWORD=Toby123$
+      - SPRING_DATASOURCE_PASSWORD=Toby123$$
     ports:
       - "8080:8080"
     depends_on:
