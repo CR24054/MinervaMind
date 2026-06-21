@@ -10,6 +10,7 @@ El proyecto surge como una respuesta al *burnout* académico, buscando que el é
 
 **Funciones Principales:**
 - **Gestión de Tareas:** Creación, edición y seguimiento de tareas académicas y recordatorios.
+- **Calendario:** Vista mensual que combina tareas y eventos (clases, exámenes) por fecha.
 - **Temporizador Pomodoro:** Herramienta para mantener el enfoque durante sesiones de estudio con intervalos de descanso cortos.
 - **Registro de Sueño:** Seguimiento de horas dormidas y calidad del sueño para generar promedios y recomendaciones.
 - **Registro de Estado de Ánimo:** Monitoreo diario del nivel de estrés, energía y humor general.
@@ -27,14 +28,30 @@ El siguiente diagrama ilustra la estructura principal de la base de datos de Min
 
 ## 3. Manual de Despliegue
 
-> pendiente
+Hay dos formas de levantar el proyecto: con Docker (recomendado, todo en un comando) o de forma manual instalando cada herramienta.
 
-### Requisitos Previos
+### Opción A — Con Docker (recomendado)
+
+**Requisitos previos:** Docker Desktop instalado y corriendo.
+
+```bash
+docker compose up --build
+```
+
+- Frontend: `http://localhost`
+- Backend / Swagger: `http://localhost:8080/swagger-ui.html`
+- Postgres: `localhost:5432`
+
+Para apagar todo: `Ctrl+C` (los datos quedan guardados en un volumen). Para volver a levantarlo después: `docker compose up` (ya sin `--build`). Borrar también los datos: `docker compose down -v`.
+
+### Opción B — Manual (sin Docker)
+
+**Requisitos Previos**
 - Node.js (v18+)
 - Java 17+ (JDK)
 - PostgreSQL (Corriendo localmente en el puerto 5432)
 
-### Pasos para ejecución local
+**Pasos para ejecución local**
 
 1. **Base de Datos:**
    Asegúrate de tener PostgreSQL instalado y en ejecución. Crea una base de datos llamada `minervamind`.
@@ -86,43 +103,18 @@ A continuación se listan los endpoints funcionales del backend:
 | **Tareas** | `GET` | `/api/tasks` | Obtiene todas las tareas registradas. |
 | **Tareas** | `GET` | `/api/tasks/user/{userId}` | Obtiene todas las tareas de un usuario en específico. |
 | **Tareas** | `GET` | `/api/tasks/{id}` | Obtiene los detalles de una tarea específica. |
+| **Tareas** | `GET` | `/api/tasks/user/{userId}/date/{date}` | Obtiene las tareas de un usuario en una fecha específica. |
 | **Tareas** | `POST` | `/api/tasks` | Crea una nueva tarea. |
 | **Tareas** | `PUT` | `/api/tasks/{id}` | Actualiza el estado o detalle de una tarea. |
 | **Tareas** | `DELETE` | `/api/tasks/{id}` | Elimina una tarea. |
+| **Calendario** | `GET` | `/api/calendar-events` | Obtiene todos los eventos registrados. |
+| **Calendario** | `GET` | `/api/calendar-events/user/{userId}` | Obtiene los eventos de un usuario. |
+| **Calendario** | `GET` | `/api/calendar-events/user/{userId}/date/{date}` | Obtiene los eventos de un usuario en una fecha específica. |
+| **Calendario** | `GET` | `/api/calendar-events/{id}` | Obtiene un evento específico por su ID. |
+| **Calendario** | `POST` | `/api/calendar-events` | Crea un nuevo evento de calendario. |
+| **Calendario** | `PUT` | `/api/calendar-events/{id}` | Actualiza un evento existente. |
+| **Calendario** | `DELETE` | `/api/calendar-events/{id}` | Elimina un evento. |
 | **Sueño** | `GET` | `/api/sleep/user/{userId}` | Obtiene el historial de registros de sueño de un usuario. |
 | **Sueño** | `GET` | `/api/sleep/user/{userId}/summary` | Obtiene el promedio de horas y estadísticas de sueño. |
 | **Sueño** | `GET` | `/api/sleep/user/{userId}/latest` | Obtiene el último registro de sueño ingresado. |
-| **Sueño** | `GET` | `/api/sleep/user/{userId}/recommendation` | Genera una recomendación de descanso. |
-| **Sueño** | `POST` | `/api/sleep` | Crea un nuevo registro de sueño. |
-| **Sueño** | `PUT` | `/api/sleep/{id}` | Edita un registro de sueño existente. |
-| **Sueño** | `DELETE` | `/api/sleep/{id}` | Elimina un registro de sueño. |
-| **Ánimo** | `GET` | `/api/moods/user/{userId}` | Obtiene el historial de estados de ánimo del usuario. |
-| **Ánimo** | `GET` | `/api/moods/user/{userId}/summary` | Obtiene un resumen del estrés y energía promedio. |
-| **Ánimo** | `POST` | `/api/moods` | Crea un nuevo registro de estado de ánimo. |
-| **Ánimo** | `PUT` | `/api/moods/{id}` | Actualiza un registro de estado de ánimo existente. |
-| **Ánimo** | `DELETE` | `/api/moods/{id}` | Elimina un registro de estado de ánimo. |
-
-### C. Capturas de las Vistas (Frontend)
-
-**Dashboard Principal:**
-![Dashboard Principal](./frontend/cap1.png)
-
-**Registro de Tareas:**
-![Tareas](./frontend/cap2.png)
-
-**Seguimiento de Sueño y Estado de Ánimo:**
-![Bienestar](./frontend/cap3.png)
-
----
-
-## 5. Equipo de Desarrollo
-
-| Nombre Completo | Carnet | Rol Principal | GitHub |
-| :--- | :---: | :--- | :--- |
-| **Daniel Abraham Cerritos Rivera** | CR24054 | Frontend / Líder | [@CR24054](https://github.com/cr24054) |
-| **Christopher Bryan Rodriguez Medina** | RM21062 | Backend / DB | [@CrisMdn01](https://github.com/CrisMdn01) |
-| **Nayeli Sarai Santos Hernandez** | SH24001 | Backend | [@sh24001-code](https://github.com/sh24001-code) |
-| **Oscar Ernesto Rivas Salguero** | RS0821 | Frontend | [@RS08021](https://github.com/rs08021) |
-
-
----
+| **Sueño** | `GET` | `/api/sleep/user/{userId}/recommendation` | Genera una recomendación de descans
